@@ -13,6 +13,8 @@ import plotly.express as px
 
 class JobPredictor:
     def __init__(self) -> None:
+        # Raghav : Need source code of these pickles.
+
         save_label_encoder = open("pickles/le.pickle","rb")
         self.le = pickle.load(save_label_encoder)
         save_label_encoder.close()
@@ -26,12 +28,14 @@ class JobPredictor:
         save_classifier.close()
 
     def predict(self, resume):
+        # Raghav : need more inline documentation
         feature = self.word_vectorizer.transform([resume])
         predicted = self.clf.predict(feature)
         resume_position = self.le.inverse_transform(predicted)[0]
         return resume_position
 
     def predict_proba(self, resume):
+        # Raghav : need more inline documentation
         feature = self.word_vectorizer.transform([resume])
         predicted_prob = self.clf.predict_proba(feature)
         return predicted_prob[0]
