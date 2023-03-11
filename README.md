@@ -28,4 +28,5 @@ The program also uses the pickle library to load pre-trained models for label en
 Finally, the program uses the streamlit library to create a web application with a user interface for uploading the job description and resume documents.
 
 ## Author
-This program was created by [Lakpa Sherpa](https://slakpa.com.np).
+This program was created by [Lakpa Sherpa](https://slakpa.com.np), 
+Henry Jones Inbaraj contributed to create GUI and cosine similarity.
