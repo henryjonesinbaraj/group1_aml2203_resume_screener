@@ -112,17 +112,17 @@ if st.button("Submit",key='2'):
     if uploaded_files is not None:
         job_predictor = JobPredictor()
         job_positions = {x: 0 for x in [cl for cl in job_predictor.le.classes_]}
-        match_percentage = {}
+        match_percentage = {} 
         for uploaded_file in uploaded_files:
-            resume_docx = docx2txt.process(uploaded_file)
+            resume_docx = docx2txt.process(uploaded_file) #converts doc format to text
             resume_position = job_predictor.predict(resume_docx)
             job_positions[resume_position] += 1
 
-            job_description= docx2txt.process("temp_jd.docx")
-            text_docx= [resume_docx, job_description]
-            words_docx_list = text_tokenizer.tokenize(resume_docx)
-            words_docx_list=[s.translate(remove_characters) for s in words_docx_list]
-            count_docx = cv.fit_transform(text_docx)
+            job_description= docx2txt.process("temp_jd.docx") #takes the job description word document in a text format
+            text_docx= [resume_docx, job_description]  #takes the texts in a list
+            words_docx_list = text_tokenizer.tokenize(resume_docx) 
+            words_docx_list=[s.translate(remove_characters) for s in words_docx_list]  #removing speacial charcters from the tokenized words 
+            count_docx = cv.fit_transform(text_docx)  #giving vectors to the words
             similarity_score_docx = cosine_similarity(count_docx)
             match_percentage_docx= round((similarity_score_docx[0][1]*100),2)
             match_percentage[uploaded_file.name] = match_percentage_docx
